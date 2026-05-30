@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Task</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="view.css">
+</head>
+
+<body>
+
+    
+    <div class="container">
+        <h2>Captcha Generator</h2>
+        <div class="captcha">
+            <input type="text" name="" id="cap_txt" readonly>
+            <button id="refresh_btn" onclick="cap_load()"><i class="fa-solid fa-arrows-rotate"></i></button>
+        </div>
+        <div class="txt_captcha">
+            <input type="text" name="" id="ent_txt" placeholder="Enter Captcha" maxlength="6" autocomplete="off">
+            <br>
+            <button id="submit_btn" onclick="check_cap()">Submit</button>
+        </div><br>
+        <div>
+            <p id="result"></p>
+        </div>
+    </div>
+</body>
+<script>
+    cap_load();
+    function cap_load() {
+        let char = "abcdefghijklmnopqrstuvwxyz1234567890"
+        let cap = ""
+        for (let i = 0; i < 6; i++) {
+            cap = cap + char[Math.floor(Math.random() * 36)];
+        }
+        document.getElementById("cap_txt").value = cap;
+    }
+    function check_cap() {
+        let ent_txt = document.getElementById("ent_txt").value
+        let cap_txt = document.getElementById("cap_txt").value
+        if(!ent_txt){
+            alert( "Please Enter Captcha");
+        }
+        else{
+            if (cap_txt == ent_txt) {
+                document.getElementById("result").innerHTML = "Validation Successfull"
+            }
+            else {
+                document.getElementById("result").innerHTML = "Validation Unsuccessfull"
+                cap_load();
+            }
+        }
+    }
+</script>
+
+</html>
